@@ -1,0 +1,32 @@
+sandbox\inspect_gpu_sandbox.ps1 on a throwaway stock Chrome 155 with default flags, 2026-10-11: the tokens of three of its processes.
+The script I used then also printed process-mitigation lines, which all failed to query; I left them out and replaced the logon session number with <n> by hand. The SID that does not resolve to an account is printed without its numbers.
+
+=== gpu-process
+IsAppContainer       : 0
+Integrity RID        : 0x1000 (Low)
+IsRestricted         : 1
+Restricting SIDs     : 5
+    restricting: BUILTIN\Users
+    restricting: \Everyone
+    restricting: NT AUTHORITY\RESTRICTED
+    restricting: S-1-0-<unresolved, rest hidden>
+    restricting: NT AUTHORITY\LogonSessionId_0_<n>
+Privileges held     : 1
+Groups               : 17 (enabled 4, deny-only 12)
+
+=== renderer
+IsAppContainer       : 0
+Integrity RID        : 0x0 (Untrusted)
+IsRestricted         : 1
+Restricting SIDs     : 1
+    restricting: \NULL SID
+Privileges held     : 0
+Groups               : 17 (enabled 1, deny-only 15)
+
+=== utility
+IsAppContainer       : 0
+Integrity RID        : 0x2000 (Medium)
+IsRestricted         : 0
+Restricting SIDs     : 0
+Privileges held     : 5
+Groups               : 17 (enabled 14, deny-only 2)

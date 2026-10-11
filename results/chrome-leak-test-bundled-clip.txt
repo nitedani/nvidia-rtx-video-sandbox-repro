@@ -1,0 +1,13 @@
+capture/leak_test.ps1 on the bundled clip, with a throwaway stock Chrome 155 and its default sandbox, 2026-10-11. RTX VSR, RTX HDR and Windows HDR were on.
+Chrome was maximized on the 3840x2160 desktop, so the video was shown larger than its 1280x720 source. The script stopped Chrome at the 6000 MB cap.
+I did not record what the video looked like. This run used an earlier version of the script, which labelled the run "baseline".
+== baseline  (file:///<repo>/capture/test-video.html)  stopped at the 6000 MB cap
+  3.7s   1013 MB
+  6.8s   1873 MB
+ 10.0s   2705 MB
+ 13.1s   3588 MB
+ 16.3s   4471 MB
+ 19.4s   5344 MB
+ 22.5s   6338 MB
+growth: 283 MB/s over 18.8 s (first 1013 MB, last 6338 MB)
+

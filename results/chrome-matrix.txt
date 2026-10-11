@@ -1,0 +1,20 @@
+Chrome on Twitch, 2026-10-11: stock Chrome 155 with its default GPU sandbox, in a visible window with a throwaway profile, driven by the Chrome DevTools MCP
+(a tool that lets a program control Chrome). The video was shown larger than its source, so that RTX VSR had something to upscale. I checked the Control Panel
+before each row and read the GPU process VRAM from the Windows GPU Process Memory counters. In rows 2 to 4 a watchdog would have stopped the GPU process above 8 GB; in row 4
+I stopped it by hand at 6 GB. The machine is in environment.txt.
+
+Row 1  RTX VSR on, RTX HDR on. Twitch 720p60 shown at 2538x1429 physical pixels (source 1280x720). The GPU process was at 14772 MB at the first sample, 1.8 s
+       after the check started (no rate). A DevTools screenshot showed normal video; DevTools probably captures the page before the video overlay is composed
+       (inferred, not measured). On my own screen the video was black.
+
+Row 2  RTX VSR off, RTX HDR off (Control Panel: both unchecked, status Inactive; the repro's HDR-only restricted stream leaked 0 MB/s). Twitch 1080p shown at
+       2538x1429 physical pixels. The GPU process went from 330 to 358 MB over 12 s, growth about 2 MB/s, no leak. I did not record the picture.
+
+Row 3  RTX VSR on, RTX HDR off (driver state from the repro's output-hash check; the repro's HDR-only restricted stream leaked 0 MB/s). Twitch 1080p shown at
+       2538x1429 physical pixels, 4180 frames played, 4 dropped, 0 corrupted according to the video element. The GPU process stayed at 355 to 380 MB over 16 s,
+       growth -0.3 MB/s, no leak. On my own screen the video area was black.
+
+Row 4  RTX VSR off, RTX HDR on (the repro's HDR-only restricted stream leaked 305 MB/s). Twitch 720p shown at 2538x1429 physical pixels. The GPU process was at
+       339 MB before the page loaded; within about 10 s of Twitch starting to play it climbed 520, 910 and 1472 MB at 2 s samples. Its process id then changed
+       (14072 to 63620; I did not look into why) and the new process went from 1643 to 6037 MB in 7.8 s (about 560 MB/s) until I stopped it at 6 GB. From the first rise (339 to 520 MB) to 6037 MB took 15.6 s, 17.6 s from the last flat sample at 339 MB. The raw samples are in chrome-vram-samples.txt (about one every 2 seconds).
+       I did not record the picture.

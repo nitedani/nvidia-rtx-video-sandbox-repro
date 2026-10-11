@@ -1,0 +1,10 @@
+# build output
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.lib
+*.exp
+# trace logs and debugger scripts written by sandbox/trace_objs.ps1
+sandbox/obj_*.log
+sandbox/obj_*.cdb

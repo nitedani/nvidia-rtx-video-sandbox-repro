@@ -1,0 +1,24 @@
+What repro opened under sandbox\trace_objs.ps1 in the low-integrity restricted token, 5 frames per run, one feature per run, 2026-10-11, counted by sandbox\summarize_trace.ps1.
+I named the logs by hand: obj_vsr_only with only RTX VSR requested, obj_hdr_only with only RTX HDR, obj_neither with neither (the script names them obj_vsr1_hdr0 and so on).
+
+obj_vsr_only.log
+  objects logged: 5448
+  opens(nvdlppx.dll)  15   loaded(nvdlppx.dll) 0
+  opens(nvAIHDRx.dll)   0   loaded(nvAIHDRx.dll) 0
+  loaded(nvppex.dll) 1   loaded(nvwgf2umx.dll) 1
+  CatRoot2\dberr.txt opened: 17
+  SystemCertificates\CA\... key opens/creates: 540
+obj_hdr_only.log
+  objects logged: 5447
+  opens(nvdlppx.dll)   0   loaded(nvdlppx.dll) 0
+  opens(nvAIHDRx.dll)  14   loaded(nvAIHDRx.dll) 0
+  loaded(nvppex.dll) 1   loaded(nvwgf2umx.dll) 1
+  CatRoot2\dberr.txt opened: 17
+  SystemCertificates\CA\... key opens/creates: 540
+obj_neither.log
+  objects logged: 2482
+  opens(nvdlppx.dll)   0   loaded(nvdlppx.dll) 0
+  opens(nvAIHDRx.dll)   0   loaded(nvAIHDRx.dll) 0
+  loaded(nvppex.dll) 1   loaded(nvwgf2umx.dll) 1
+  CatRoot2\dberr.txt opened: 0
+  SystemCertificates\CA\... key opens/creates: 0

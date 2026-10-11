@@ -1,0 +1,22 @@
+sandbox\wvt.exe on the driver's AI modules, 2026-10-11, driver 616.56: once in a normal process and once under sbx.exe restricted (the default 5 restricting SIDs).
+
+== nvdlppx.dll (normal)
+  WinVerifyTrust (catalog C:\WINDOWS\system32\CatRoot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\oem22.cat) -> 0x00000000 TRUSTED
+  WinVerifyTrust (embedded signature)  -> 0x00000000 TRUSTED
+  exit code 0
+
+== nvdlppx.dll (restricted)
+  catalog lookup: no catalog found for this hash (GetLastError=1062 / 0x00000426)
+  WinVerifyTrust (embedded signature)  -> 0x80096005 NOT TRUSTED
+  exit code 4
+
+== nvAIHDRx.dll (normal)
+  WinVerifyTrust (catalog C:\WINDOWS\system32\CatRoot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\oem22.cat) -> 0x00000000 TRUSTED
+  WinVerifyTrust (embedded signature)  -> 0x00000000 TRUSTED
+  exit code 0
+
+== nvAIHDRx.dll (restricted)
+  catalog lookup: no catalog found for this hash (GetLastError=1062 / 0x00000426)
+  WinVerifyTrust (embedded signature)  -> 0x80096005 NOT TRUSTED
+  exit code 4
+

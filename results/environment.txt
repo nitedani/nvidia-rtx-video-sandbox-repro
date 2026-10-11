@@ -1,0 +1,15 @@
+Test machine for everything in results/ (read from the machine on 2026-10-11):
+
+GPU                NVIDIA GeForce RTX 5080
+VRAM               16 GB (RTX 5080 specification)
+Display            3840x2160 desktop
+Driver             32.0.16.1656 (NVIDIA 616.56)
+Windows            Windows 11 Pro for Workstations, build 26200
+Chrome             155.0.8059.39 (stock, GPU sandbox on); the DevTools MCP runs used a stock Chrome 155 as well
+Node               v24.14.0 (capture/cdp_mem.js needs Node 22 or newer)
+RTX VSR / HDR      set in the NVIDIA Control Panel (Video > Adjust video image settings > RTX video enhancement)
+Windows HDR        on in every run where RTX HDR was on (RTX HDR needed it on this machine); not recorded for the runs where RTX HDR was off
+
+Before each row of chrome-matrix.txt I checked the Control Panel, and the repro's view of the driver state: its output hash and whether its restricted RTX HDR
+stream leaked. The hash turned out to misread RTX HDR, so check.ps1 reads the state from which AI modules a normal process loads. With both features on, that
+check reads both on (check-output.txt).

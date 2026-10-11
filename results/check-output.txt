@@ -1,0 +1,6 @@
+check.ps1, 2026-10-11, RTX 5080, driver 616.56, with RTX VSR, RTX HDR and Windows HDR on. It took 22 s and exited with 1.
+
+RTX VSR is ON and RTX HDR is ON in the driver (a normal process that requests a feature loads its AI module only when the feature is on).
+VSR gives an all-zero frame in a restricted-token process  REPRODUCED      normal process: ok, restricted: BLACK
+RTX HDR leaks VRAM in a restricted-token process           REPRODUCED      normal 0 MB/s, restricted 304 MB/s (9.4 MB per frame at 32 frames/s), restricted process loaded: nvppex.dll
+P010 to NV12 with BT.2020 PQ gives an all-zero frame       REPRODUCED      PQ: BLACK, BT.709: ok

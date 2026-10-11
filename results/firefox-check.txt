@@ -1,0 +1,168 @@
+capture/firefox_check.ps1 on Firefox 157.0.1 with a throwaway profile and its default sandbox, 2026-10-11. RTX VSR, RTX HDR and Windows HDR were on.
+The script sizes the Firefox window to 3200x1700 on the 3840x2160 desktop and checks the size before it measures. It reads the VRAM of every Firefox process
+from the Windows GPU Process Memory counters about every 2 s, stops at 6000 MB (a sample can land up to about 1 GB past that), prints the token of one
+process of each type, and closes the processes of its profile. Run A used an earlier version of the script; run B used the one in this repo.
+I did not record what the video looked like in these runs. I replaced the logon session number in the tokens with <n> by hand.
+
+=== Run A: a live Twitch channel
+started firefox pid 67672; window now 3200x1700 at (100,100) on a 3840x2160 desktop
+elapsed 17 s. cap hit by gpu pid 60872 at 6360 MB
+gpu pid 60872          samples  7  first   298 MB  last  6360 MB  max  6360 MB
+main pid 67672         samples  7  first     0 MB  last     0 MB  max     0 MB
+rdd pid 61976          samples  6  first    11 MB  last    11 MB  max    11 MB
+socket pid 59020       samples  6  first     0 MB  last     0 MB  max     0 MB
+tab pid 32096          samples  6  first     0 MB  last     0 MB  max     0 MB
+tab pid 55012          samples  5  first     0 MB  last     0 MB  max     0 MB
+tab pid 56544          samples  6  first     0 MB  last     0 MB  max     0 MB
+tab pid 61516          samples  5  first     0 MB  last     0 MB  max     0 MB
+tab pid 63636          samples  6  first     0 MB  last     0 MB  max     0 MB
+tab pid 64232          samples  1  first     0 MB  last     0 MB  max     0 MB
+tab pid 67336          samples  6  first     0 MB  last     0 MB  max     0 MB
+tab pid 69408          samples  6  first     0 MB  last     0 MB  max     0 MB
+tab pid 7396           samples  6  first     0 MB  last     0 MB  max     0 MB
+utility pid 61496      samples  6  first     0 MB  last     0 MB  max     0 MB
+utility pid 63868      samples  5  first     0 MB  last     0 MB  max     0 MB
+utility pid 64804      samples  6  first     0 MB  last     0 MB  max     0 MB
+--- tokens (one process of each type)
+=== main (pid 67672)
+IsAppContainer       : 0
+Integrity RID        : 0x2000 (Medium)
+IsRestricted         : 0
+Restricting SIDs     : 0
+Privileges held     : 5
+Groups               : 17 (enabled 14, deny-only 2)
+=== gpu (pid 60872)
+IsAppContainer       : 0
+Integrity RID        : 0x1000 (Low)
+IsRestricted         : 1
+Restricting SIDs     : 5
+    restricting: BUILTIN\Users
+    restricting: \Everyone
+    restricting: NT AUTHORITY\RESTRICTED
+    restricting: S-1-0-<unresolved, rest hidden>
+    restricting: NT AUTHORITY\LogonSessionId_0_<n>
+Privileges held     : 1
+Groups               : 17 (enabled 4, deny-only 12)
+=== socket (pid 59020)
+IsAppContainer       : 0
+Integrity RID        : 0x0 (Untrusted)
+IsRestricted         : 1
+Restricting SIDs     : 5
+    restricting: BUILTIN\Users
+    restricting: \Everyone
+    restricting: NT AUTHORITY\RESTRICTED
+    restricting: S-1-0-<unresolved, rest hidden>
+    restricting: NT AUTHORITY\LogonSessionId_0_<n>
+Privileges held     : 1
+Groups               : 17 (enabled 4, deny-only 12)
+=== rdd (pid 61976)
+IsAppContainer       : 0
+Integrity RID        : 0x1000 (Low)
+IsRestricted         : 1
+Restricting SIDs     : 5
+    restricting: BUILTIN\Users
+    restricting: \Everyone
+    restricting: NT AUTHORITY\RESTRICTED
+    restricting: S-1-0-<unresolved, rest hidden>
+    restricting: NT AUTHORITY\LogonSessionId_0_<n>
+Privileges held     : 1
+Groups               : 17 (enabled 4, deny-only 12)
+=== tab (pid 32096)
+IsAppContainer       : 0
+Integrity RID        : 0x0 (Untrusted)
+IsRestricted         : 1
+Restricting SIDs     : 2
+    restricting: \NULL SID
+    restricting: S-1-0-<unresolved, rest hidden>
+Privileges held     : 1
+Groups               : 17 (enabled 1, deny-only 15)
+=== utility (pid 64804)
+IsAppContainer       : 0
+Integrity RID        : 0x0 (Untrusted)
+IsRestricted         : 1
+Restricting SIDs     : 2
+    restricting: \NULL SID
+    restricting: S-1-0-<unresolved, rest hidden>
+Privileges held     : 0
+Groups               : 17 (enabled 1, deny-only 15)
+stopped the processes of this profile
+
+=== Run B: the bundled synthetic clip (capture/test-video.html, the default URL)
+started firefox pid 66328; window now 3200x1700 at (100,100)
+elapsed 20 s. cap hit by gpu pid 69304 at 6549 MB
+gpu pid 69304          samples  8  first  1806 MB  last  6549 MB  max  6549 MB
+main pid 66328         samples  8  first     0 MB  last     0 MB  max     0 MB
+rdd pid 59976          samples  7  first    11 MB  last    11 MB  max    11 MB
+socket pid 68888       samples  7  first     0 MB  last     0 MB  max     0 MB
+tab pid 51824          samples  7  first     0 MB  last     0 MB  max     0 MB
+tab pid 62032          samples  7  first     0 MB  last     0 MB  max     0 MB
+tab pid 66136          samples  7  first     0 MB  last     0 MB  max     0 MB
+tab pid 66544          samples  7  first     0 MB  last     0 MB  max     0 MB
+tab pid 67916          samples  7  first     0 MB  last     0 MB  max     0 MB
+tab pid 68728          samples  7  first     0 MB  last     0 MB  max     0 MB
+tab pid 69296          samples  7  first     0 MB  last     0 MB  max     0 MB
+utility pid 66584      samples  7  first     0 MB  last     0 MB  max     0 MB
+--- tokens (one process of each type)
+=== main (pid 66328)
+IsAppContainer       : 0
+Integrity RID        : 0x2000 (Medium)
+IsRestricted         : 0
+Restricting SIDs     : 0
+Privileges held     : 5
+Groups               : 17 (enabled 14, deny-only 2)
+=== gpu (pid 69304)
+IsAppContainer       : 0
+Integrity RID        : 0x1000 (Low)
+IsRestricted         : 1
+Restricting SIDs     : 5
+    restricting: BUILTIN\Users
+    restricting: \Everyone
+    restricting: NT AUTHORITY\RESTRICTED
+    restricting: S-1-0-<unresolved, rest hidden>
+    restricting: NT AUTHORITY\LogonSessionId_0_<n>
+Privileges held     : 1
+Groups               : 17 (enabled 4, deny-only 12)
+=== socket (pid 68888)
+IsAppContainer       : 0
+Integrity RID        : 0x0 (Untrusted)
+IsRestricted         : 1
+Restricting SIDs     : 5
+    restricting: BUILTIN\Users
+    restricting: \Everyone
+    restricting: NT AUTHORITY\RESTRICTED
+    restricting: S-1-0-<unresolved, rest hidden>
+    restricting: NT AUTHORITY\LogonSessionId_0_<n>
+Privileges held     : 1
+Groups               : 17 (enabled 4, deny-only 12)
+=== rdd (pid 59976)
+IsAppContainer       : 0
+Integrity RID        : 0x1000 (Low)
+IsRestricted         : 1
+Restricting SIDs     : 5
+    restricting: BUILTIN\Users
+    restricting: \Everyone
+    restricting: NT AUTHORITY\RESTRICTED
+    restricting: S-1-0-<unresolved, rest hidden>
+    restricting: NT AUTHORITY\LogonSessionId_0_<n>
+Privileges held     : 1
+Groups               : 17 (enabled 4, deny-only 12)
+=== tab (pid 66544)
+IsAppContainer       : 0
+Integrity RID        : 0x0 (Untrusted)
+IsRestricted         : 1
+Restricting SIDs     : 2
+    restricting: \NULL SID
+    restricting: S-1-0-<unresolved, rest hidden>
+Privileges held     : 1
+Groups               : 17 (enabled 1, deny-only 15)
+=== utility (pid 66584)
+IsAppContainer       : 0
+Integrity RID        : 0x0 (Untrusted)
+IsRestricted         : 1
+Restricting SIDs     : 2
+    restricting: \NULL SID
+    restricting: S-1-0-<unresolved, rest hidden>
+Privileges held     : 0
+Groups               : 17 (enabled 1, deny-only 15)
+stopped the processes of this profile
+

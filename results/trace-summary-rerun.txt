@@ -1,0 +1,10 @@
+A second sandbox\trace_objs.ps1 -Vsr 1 -Hdr 0 run, 2026-10-11, in the low-integrity restricted token, counted by sandbox\summarize_trace.ps1.
+The counts equal the VSR-only entry in trace-summary.txt. I named the log obj_verify_vsr by hand.
+
+obj_verify_vsr.log
+  objects logged: 5448
+  opens(nvdlppx.dll)  15   loaded(nvdlppx.dll) 0
+  opens(nvAIHDRx.dll)   0   loaded(nvAIHDRx.dll) 0
+  loaded(nvppex.dll) 1   loaded(nvwgf2umx.dll) 1
+  CatRoot2\dberr.txt opened: 17
+  SystemCertificates\CA\... key opens/creates: 540

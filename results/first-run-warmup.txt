@@ -1,0 +1,7 @@
+The first run of a freshly built repro.exe with RTX VSR requested gave a different output than the runs after it, 2026-10-11.
+The case is "normal process, VSR on, HDR off, 1920x1080 NV12 to 3076x1730 R10G10B10A2, 3 frames, out colour space 0, in colour space 8".
+
+first run after a rebuild   exit 0  HASH edd775ff73367231  mean_rgb_sum=1385.8 max=1772 -> ok
+second run, and every run before the rebuild   exit 0  HASH 1a821f53247435b3  mean_rgb_sum=1386.9 max=1779 -> ok
+
+Both outputs are non-black, so the ok or BLACK decision is the same. It happened on two rebuilds of repro.exe. The cause is unknown.

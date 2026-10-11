@@ -1,0 +1,18 @@
+sandbox\bisect.ps1, 2026-10-11, driver 616.56, with RTX VSR, RTX HDR and Windows HDR on. Each cell is a single run, not repeated.
+VSR out: the VSR check under that token. nvdlppx and nvAIHDRx: wvt.exe under that token. HDR VRAM and AI modules mapped: one stream test with both
+features requested, its VRAM growth and the modules mapped into it 4 s in. The default 5 SIDs are Users, Everyone, RESTRICTED, the current user and the logon session.
+
+token                                  VSR out   nvdlppx (embedded/catalog) nvAIHDRx      HDR VRAM       AI modules mapped
+no sandbox                             ok        TRUSTED / TRUSTED          TRUSTED          0 MB/s flat nvAIHDRx nvdlppx nvppex
+lowil only                             ok        TRUSTED / TRUSTED          TRUSTED          0 MB/s flat nvAIHDRx nvdlppx nvppex
+job only                               ok        TRUSTED / TRUSTED          TRUSTED          0 MB/s flat nvAIHDRx nvdlppx nvppex
+restricted (default 5 SIDs)            BLACK     NOT TRUSTED / no catalog   NOT TRUSTED    306 MB/s LEAK nvppex
+lowil+restricted+job (Chromium-like)   BLACK     NOT TRUSTED / no catalog   NOT TRUSTED    307 MB/s LEAK nvppex
+default + Authenticated Users          ok        TRUSTED / no catalog       TRUSTED          0 MB/s flat nvAIHDRx nvdlppx nvppex
+default + SYSTEM                       ok        TRUSTED / TRUSTED          TRUSTED          0 MB/s flat nvAIHDRx nvdlppx nvppex
+default + Administrators               ok        TRUSTED / TRUSTED          TRUSTED          0 MB/s flat nvAIHDRx nvdlppx nvppex
+default + INTERACTIVE                  BLACK     NOT TRUSTED / NOT TRUSTED  NOT TRUSTED    306 MB/s LEAK nvppex
+default + SERVICE                      BLACK     NOT TRUSTED / NOT TRUSTED  NOT TRUSTED    303 MB/s LEAK nvppex
+default + NETWORK SERVICE              BLACK     NOT TRUSTED / no catalog   NOT TRUSTED    304 MB/s LEAK nvppex
+default + LOCAL SERVICE                BLACK     NOT TRUSTED / no catalog   NOT TRUSTED    304 MB/s LEAK nvppex
+default, WRITE_RESTRICTED flag         ok        TRUSTED / TRUSTED          TRUSTED          0 MB/s flat nvAIHDRx nvdlppx nvppex

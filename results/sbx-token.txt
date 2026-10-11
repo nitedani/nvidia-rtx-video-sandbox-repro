@@ -1,0 +1,30 @@
+The token of a program started by sandbox\sbx.exe, 2026-10-11, printed with Get-TokenDescription from common.ps1 (the program is ping.exe).
+I replaced the account name with <user> and the logon session number with <n> by hand. Against chrome-gpu-token.txt: the restricting SIDs are the same except
+the fourth, which is the current user here and an SID that does not resolve to an account in Chrome, and this token keeps more groups enabled (14 against 4).
+
+
+=== sbx.exe restricted (the child process is ping.exe)
+IsAppContainer       : 0
+Integrity RID        : 0x2000 (Medium)
+IsRestricted         : 1
+Restricting SIDs     : 5
+    restricting: BUILTIN\Users
+    restricting: \Everyone
+    restricting: NT AUTHORITY\RESTRICTED
+    restricting: <machine>\<user>
+    restricting: NT AUTHORITY\LogonSessionId_0_<n>
+Privileges held     : 1
+Groups               : 17 (enabled 14, deny-only 2)
+
+=== sbx.exe lowil+restricted+job (the child process is ping.exe)
+IsAppContainer       : 0
+Integrity RID        : 0x1000 (Low)
+IsRestricted         : 1
+Restricting SIDs     : 5
+    restricting: BUILTIN\Users
+    restricting: \Everyone
+    restricting: NT AUTHORITY\RESTRICTED
+    restricting: <machine>\<user>
+    restricting: NT AUTHORITY\LogonSessionId_0_<n>
+Privileges held     : 1
+Groups               : 17 (enabled 14, deny-only 2)

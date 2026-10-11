@@ -1,0 +1,27 @@
+A throwaway stock Chrome 155 on the bundled clip, 2026-10-11, RTX VSR, RTX HDR and Windows HDR on, while the screen was off
+(Windows had turned the display off after 10 minutes without input). The same Chrome leaked 283 MB/s with the screen on (chrome-leak-test-bundled-clip.txt).
+
+== capture/leak_test.ps1, screen off: flat
+  3.3s    165 MB
+  6.4s    159 MB
+  9.5s    176 MB
+ 12.7s    176 MB
+ 15.8s    176 MB
+ 18.9s    176 MB
+ 22.1s    154 MB
+ 25.2s    153 MB
+ 28.3s    153 MB
+ 31.5s    153 MB
+ 34.6s    141 MB
+ 37.7s    141 MB
+ 40.9s    141 MB
+growth: -1 MB/s over 37.6 s (first 165 MB, last 141 MB)
+
+== screen off, the same Chrome started by hand with common.ps1's Start-ThrowawayChrome and Watch-ChromeGpuVram, plus the flags
+   --disable-features=CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows: leaks
+  3.7s    918 MB
+  6.8s   1752 MB
+ 10.0s   2645 MB
+ 13.1s   3422 MB   (stopped at a 3000 MB cap)
+
+I think that with the screen off Chrome treats its window as hidden and stops drawing the video, so nothing leaks; turning its occlusion tracking off brings the leak back.
