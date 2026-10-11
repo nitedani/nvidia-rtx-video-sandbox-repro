@@ -94,8 +94,8 @@ function Start-Sandboxed([string]$Mode, [string[]]$Command) {
     $childPid = 0
     for ($i = 0; $i -lt 40 -and -not $childPid; $i++) {
         Start-Sleep -Milliseconds 250
-        $m = if (Test-Path $errFile) { [regex]::Match((Get-Content $errFile -Raw), 'child pid (\d+)') } else { $null }
-        if ($m -and $m.Success) { $childPid = [int]$m.Groups[1].Value } elseif ($launcher.HasExited) { break }
+        $m = [regex]::Match([string](Get-Content $errFile -Raw -ErrorAction SilentlyContinue), 'child pid (\d+)')
+        if ($m.Success) { $childPid = [int]$m.Groups[1].Value } elseif ($launcher.HasExited) { break }
     }
     [pscustomobject]@{ Launcher = $launcher; ChildPid = $childPid; ErrFile = $errFile; OutFile = "$base.out" }
 }
