@@ -76,7 +76,8 @@ A call that can't do its work should return an error, not `S_OK` with an empty f
   | on | on | 14,772 MB at the first sample | black |
 
   In the RTX HDR only row the GPU process id changed once on the way (a restart or a crash; I didn't look); `results/chrome-vram-samples.txt` has its raw samples. I judged black by looking at my screen. A DevTools screenshot showed normal video, I think because it captures the page before the video overlay is drawn, so this repo has no images.
-- **Firefox.** Firefox 157.0.1's GPU process has the same token shape as Chrome's. Its VRAM went from 298 MB to 6,360 MB in 17 s on Twitch, and from 1,806 MB to 6,549 MB in 20 s on the bundled clip, when my cap stopped it (`results/firefox-check.txt`). Chrome on the bundled clip grew 283 MB/s (`results/chrome-leak-test-bundled-clip.txt`). I didn't record the picture in these runs.
+- **Firefox.** Firefox 157.0.1's GPU process has the same token shape as Chrome's. Its VRAM went from 298 MB to 6,360 MB in 17 s on Twitch, and from 1,806 MB to 6,549 MB in 20 s on the bundled clip, when my cap stopped it (`results/firefox-check.txt`). Chrome on the bundled clip grew 283 MB/s (`results/chrome-leak-test-bundled-clip.txt`).
+- **Chrome with its GPU sandbox off.** With `--disable-gpu-sandbox` (the other processes stay sandboxed), both problems went away: on Twitch the GPU process stayed flat at about 950 MB and the video played normally. `--no-sandbox` did the same. These were early runs, before I controlled the window size, so their samples are not in `results/`. I didn't record the picture in these runs.
 
 The machine is in `results/environment.txt`. It's all one machine, one driver and one video site.
 
@@ -89,7 +90,6 @@ The driver verifies each AI module with `WinVerifyTrust` when it loads it, and t
 - Which object the check is denied. The SID pattern points at something Authenticated Users, SYSTEM and Administrators can write to, but Users and Everyone can't.
 - What the leaked 9.4 MB per frame is.
 - Whether Chrome's black video is the same all-zero frame the repro writes.
-- Whether Chrome with its GPU sandbox turned off works normally. I haven't run that.
 - Why the first run of a freshly built `repro.exe` with VSR on writes a different, non-black frame from the runs after it (`results/first-run-warmup.txt`).
 
 ### A separate bug: BT.2020 conversions
